@@ -1,10 +1,7 @@
-{"title":"Cars","rating":"5","_id":"GQntRwlqUqM0P8Hx"}
-{"title":"Avengers 2","_id":"LXFVNvBVsHHCfaZp"}
+{"title":"Avengers","_id":"LXFVNvBVsHHCfaZp"}
 {"title":"Avatar","_id":"XBiqcrlG8wodpfKU"}
+{"title":"X-Men 3","_id":"ZCVsCMfhNozYzjFG"}
 {"title":"Transformers","_id":"a9u39G05L1ow2Dvb"}
 {"title":"Transformers 2","_id":"vfKCjgp0MV7FAwCg"}
 {"$$indexCreated":{"fieldName":"title","unique":true,"sparse":false}}
-{"title":"Avengers 2","_id":"LXFVNvBVsHHCfaZp"}
-{"titles":"Avengers 2","_id":"LXFVNvBVsHHCfaZp"}
-{"title":"Avengers","_id":"LXFVNvBVsHHCfaZp"}
-{"title":"X-Men 3","_id":"ZCVsCMfhNozYzjFG"}
+{"title":"Legend","_id":"k9ZYhPl219OwQ6oD"}

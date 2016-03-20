@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var Datastore = require('nedb');
 var db = {};
-var responder = require('./httpResponder');
+var wrapper = require('./lib/wrapper');
 
 var port = process.argv[2] || 3000;
 var root = "http://localhost:" + port;
@@ -15,12 +15,26 @@ db.movies.ensureIndex({ fieldName: 'title', unique: true});
 app.use(express.bodyParser());
 app.use(function (req, res, next) {
     res.type('application/json');
-    res.locals.respond = responder.setup(res);
+    res.locals.wrap = wrapper.create({start: new Date()});
     next();
 });
 
 app.get('/movies', function (req, res) {
-    db.movies.find({}, res.locals.respond);
+    db.movies.find({}, function (err, results) {
+        if(err){
+            res.json(500, {error: err});
+            return;
+        }
+        // res.json(200,  res.locals.wrap(results.map(function (movie) {
+        //     movie.links = { self:root + '/movies/' +movie._id};
+        //     return movie;
+        // }),{
+        //     next: root+ '/movies?page=2'
+        // }));
+        res.json(200, res.locals.wrap({}, {item : results.map(function (movie) {
+            return root + '/movies/' + movie._id;
+        })}))
+    });
 });
 
 app.post('/movies', function (req, res) {
@@ -49,7 +63,7 @@ app.get('/movies/:id', function (req, res) {
             res.json(404, {erro: "We did not find a movie with id " +req.params.id });
             return;
         }
-        res.json(200, result);
+        res.json(200, res.locals.wrap(result, { self: root + '/movies/' + req.params.id}));
     });
 });
 
